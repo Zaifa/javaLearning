@@ -7,12 +7,18 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by cepheus
  * 25/07/2017.
  */
-public class InterruptLockExample {
-    private ReentrantLock lock = new ReentrantLock(true);
+public class LockExample {
 
     public static void main(String[] args) {
-        InterruptLockExample interruptLockExample = new InterruptLockExample();
-        ReentrantLock lock = interruptLockExample.getLock();
+        LockExample lockExample = new LockExample();
+        Long id = Long.parseLong("123");
+        id = -id;
+        System.out.println("adb " + id);
+        lockExample.interruptLockExample();
+    }
+
+    private void interruptLockExample() {
+        ReentrantLock lock = new ReentrantLock(true);
         Thread thread1 = new Thread(() -> {
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -49,13 +55,5 @@ public class InterruptLockExample {
 
         }, "thread2");
         thread2.start();
-    }
-
-    public ReentrantLock getLock() {
-        return lock;
-    }
-
-    public void setLock(ReentrantLock lock) {
-        this.lock = lock;
     }
 }
